@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Course Management</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #eef2ff;
+            padding: 50px;
+        }
+        a {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 10px;
+            background: navy;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Online Course Management System</h1>
+    <p>Learn new skills with our online courses.</p>
+
+    <a href="admin.html">Admin</a>
+    <a href="user.html">Student</a>
+</body>
+</html>
