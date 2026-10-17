@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <style>
+        body { font-family: Arial; padding: 30px; }
+        input, button { padding: 10px; margin: 5px; }
+        button { background: navy; color: white; border: 0; }
+    </style>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+
+    <input id="course" placeholder="Course name">
+    <input id="teacher" placeholder="Instructor name">
+    <button onclick="addCourse()">Add Course</button>
+
+    <h2>Available Courses</h2>
+    <ul id="list"></ul>
+
+    <a href="index.html">Home</a>
+
+    <script>
+        function showCourses() {
+            let courses = JSON.parse(
+                localStorage.getItem("courses") || "[]"
+            );
+
+            document.getElementById("list").innerHTML = "";
+
+            courses.forEach((c, i) => {
+                let li = document.createElement("li");
+                li.textContent = c.name + " - " + c.teacher + " ";
+
+                let btn = document.createElement("button");
+                btn.textContent = "Delete";
+                btn.onclick = function() {
+                    courses.splice(i, 1);
+                    localStorage.setItem(
+                        "courses", JSON.stringify(courses)
+                    );
+                    showCourses();
+                };
+
+                li.appendChild(btn);
+                document.getElementById("list").appendChild(li);
+            });
+        }
+
+        function addCourse() {
+            let name = document.getElementById("course").value.trim();
+            let teacher = document.getElementById("teacher").value.trim();
+
+            if (!name || !teacher) {
+                alert("Enter course and instructor name");
+                return;
+            }
+
+            let courses = JSON.parse(
+                localStorage.getItem("courses") || "[]"
+            );
+
+            courses.push({ name: name, teacher: teacher });
+
+            localStorage.setItem("courses", JSON.stringify(courses));
+
+            document.getElementById("course").value = "";
+            document.getElementById("teacher").value = "";
+
+            showCourses();
+        }
+
+        showCourses();
+    </script>
+</body>
+</html>
